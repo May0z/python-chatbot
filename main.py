@@ -2,7 +2,7 @@ import random
 
 
 intents ={
-  "greetings":["hi","hello","yo","hey"],
+  "greetings":["hi","hello","hey"],
   "farewell":["bye","goodbye","farewell"],
   "gratitude":["thanks","thankyou","thankyou so much"]
 }
@@ -23,8 +23,12 @@ while True:
     break
 
   for intent, phrases in intents.items():
-    if user_msg in phrases:
-      detected_intent = intent
+    
+    for phrase in phrases:
+      if phrase in user_msg:
+        detected_intent = intent
+        break
+    if detected_intent:
       break
 
   if detected_intent:
