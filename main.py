@@ -1,9 +1,12 @@
+intents ={
+  "greetings":["hi","hello","yo","hey"],
+  "farewell":["bye","goodbye","farewell"],
+  "gratitude":["thanks","thankyou","thankyou so much"]
+}
 responses = {
-  'hi':'Hello, how are you?',
-  'i am fine': 'That\'s good to know.',
-  'how are you': 'I am just a code, but I\'m doing great',
-  'good': 'Thankyou!',
-  'bye':'Goodbye, please type "exit" to quit'
+  "greetings":"Hello there!!",
+  "farewell":"Type 'exit' to quit",
+  "gratitude": "You're very Welcome..."
 }
 
 print('Hi! I\'m a simple chatbot')
@@ -11,9 +14,17 @@ print('Hi! I\'m a simple chatbot')
 while True:
   user_msg = input('You: ').lower()
 
-  if user_msg.lower() == 'exit' :
+  detected_intent = None
+  if user_msg == 'exit' :
     print('Bot: Goodbye, I\'m out...')
     break
 
-  reply = responses.get(user_msg, 'I don\'t understand')
-  print('Bot:',reply)
+  for intent, phrases in intents.items():
+    if user_msg in phrases:
+      detected_intent = intent
+      break
+
+  if detected_intent:
+    print("Bot:",responses.get(detected_intent))
+  else:
+    print("Bot: I didn't get what you said.")
